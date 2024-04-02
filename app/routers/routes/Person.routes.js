@@ -16,7 +16,7 @@ router.get('/', PersonController.getAll)
 
 /**
  * @swagger
- * /api/person/{id}:
+  * /api/person/{id}:
  *   get:
  *     summary: Get a person by ID
  *     description: Use to request a person by their ID
@@ -32,6 +32,8 @@ router.get('/', PersonController.getAll)
  *         description: Successful response
  *         content:
  *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Person'
  *       '404':
  *         description: Person not found
  *       '500':
