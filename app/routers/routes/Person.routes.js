@@ -1,5 +1,6 @@
 import express from 'express'
 import PersonController from '../../controllers/Person.controller.js'
+import { verifyToken } from '../../middleware/user.middleware.js'
 
 const router = express.Router()
 
@@ -12,11 +13,11 @@ const router = express.Router()
  *      '200':
  *        description: A successful response
  */
-router.get('/', PersonController.getAll)
+router.get('/', verifyToken, PersonController.getAll)
 
 /**
  * @swagger
- * /api/person/{id}:
+  * /api/person/{id}:
  *   get:
  *     summary: Get a person by ID
  *     description: Use to request a person by their ID
@@ -32,12 +33,14 @@ router.get('/', PersonController.getAll)
  *         description: Successful response
  *         content:
  *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Person'
  *       '404':
  *         description: Person not found
  *       '500':
  *         description: Internal server error
  */
-router.get('/:id', PersonController.getById)
+router.get('/:id', verifyToken, PersonController.getById)
 
 /**
  * @swagger
@@ -68,7 +71,7 @@ router.get('/:id', PersonController.getById)
  *       '400':
  *         description: Invalid request
  */
-router.post('/', PersonController.create)
+router.post('/', verifyToken, PersonController.create)
 
 /**
  * @swagger
@@ -108,7 +111,7 @@ router.post('/', PersonController.create)
  *       '404':
  *         description: Person not found
  */
-router.put('/:id', PersonController.update)
+router.put('/:id', verifyToken, PersonController.update)
 
 /**
  * @swagger
@@ -129,6 +132,6 @@ router.put('/:id', PersonController.update)
  *       '404':
  *         description: Person not found
  */
-router.delete('/:id', PersonController.remove)
+router.delete('/:id', verifyToken, PersonController.remove)
 
 export default router
