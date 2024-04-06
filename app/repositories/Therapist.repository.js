@@ -72,7 +72,8 @@ async function login(email, password) {
     const record = result.recordset[0];
     const therapist = new Therapist(record.id, record.fName, record.lName, record.email, record.contactNo, record.password);
     if (therapist.comparePassword(password)) {
-        return createTokan(therapist);
+        const token = createTokan(therapist);
+        return token;
     } else {
         return null;
     }
