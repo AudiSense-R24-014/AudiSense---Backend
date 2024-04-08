@@ -1,9 +1,9 @@
 import therapistRouter from "./routes/Therapist.routes.js"
-import childRouter from "./routes/Child.routes.js"
+import patientRouter from "./routes/Patient.routes.js"
 
 function router(app) {
     app.use('/api/therapist', therapistRouter)
-    app.use('/api/child', childRouter)
+    app.use('/api/patient', patientRouter)
 }
 
 export default router

@@ -1,5 +1,5 @@
 import express from 'express';
-import ChildController from '../../controllers/Child.controller.js';
+import PatientController from '../../controllers/Patient.controller.js';
 import { verifyToken } from '../../middleware/user.middleware.js';
 
 const router = express.Router();
@@ -13,7 +13,7 @@ const router = express.Router();
  *      '200':
  *        description: A successful response
  */
-router.get('/', verifyToken, ChildController.getAll);
+router.get('/', verifyToken, PatientController.getAll);
 
 /**
  * @swagger
@@ -40,7 +40,7 @@ router.get('/', verifyToken, ChildController.getAll);
  *      '500':
  *        description: Internal server error
  */
-router.get('/:id', verifyToken, ChildController.getById);
+router.get('/:id', verifyToken, PatientController.getById);
 
 /**
  * @swagger
@@ -86,7 +86,7 @@ router.get('/:id', verifyToken, ChildController.getById);
  *      '500':
  *        description: Internal server error
  */
-router.put('/:id', verifyToken, ChildController.update);
+router.put('/:id', verifyToken, PatientController.update);
 
 /**
  * @swagger
@@ -109,7 +109,7 @@ router.put('/:id', verifyToken, ChildController.update);
  *      '500':
  *        description: Internal server error
  */
-router.delete('/:id', verifyToken, ChildController.remove);
+router.delete('/:id', verifyToken, PatientController.remove);
 
 /**
  * @swagger
@@ -146,7 +146,7 @@ router.delete('/:id', verifyToken, ChildController.remove);
  *      '500':
  *        description: Internal server error
  */
-router.post('/', ChildController.create);
+router.post('/', PatientController.create);
 
 /**
  * @swagger
@@ -176,6 +176,6 @@ router.post('/', ChildController.create);
  *      '500':
  *        description: Internal server error
  */
-router.post('/login', ChildController.login);
+router.post('/login', PatientController.login);
 
 export default router;
