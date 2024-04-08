@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Therapist-Patient
+ *   description: Therapist-Patient endpoints
+ */
+
 import express from 'express';
 import TherapistPatientController from '../../controllers/TherapistPatient.controller.js';
 
@@ -8,6 +15,7 @@ const router = express.Router();
  * /api/therapist-patient:
  *  get:
  *    summary: Retrieve all therapist-patients
+ *    tags: [Therapist-Patient]
  *    description: Use to request all therapist-patients
  *    responses:
  *      '200':
@@ -20,6 +28,7 @@ router.get('/', TherapistPatientController.getAll);
  * /api/therapist-patient/{id}:
  *  get:
  *    summary: Get a therapist-patient by ID
+ *    tags: [Therapist-Patient]
  *    description: Use to request a therapist-patient by their ID
  *    parameters:
  *      - in: path
@@ -47,6 +56,7 @@ router.get('/:id', TherapistPatientController.getById);
  * /api/therapist-patient:
  *  post:
  *    summary: Create a therapist-patient
+ *    tags: [Therapist-Patient]
  *    description: Use to create a therapist-patient
  *    requestBody:
  *      required: true
@@ -67,6 +77,7 @@ router.post('/', TherapistPatientController.create);
  * /api/therapist-patient/{id}:
  *  put:
  *    summary: Update a therapist-patient by ID
+ *    tags: [Therapist-Patient]
  *    description: Use to update a therapist-patient by their ID
  *    parameters:
  *      - in: path
@@ -94,6 +105,7 @@ router.put('/:id', TherapistPatientController.update);
  * /api/therapist-patient/{id}:
  *  delete:
  *    summary: Delete a therapist-patient by ID
+ *    tags: [Therapist-Patient]
  *    description: Use to delete a therapist-patient by their ID
  *    parameters:
  *      - in: path

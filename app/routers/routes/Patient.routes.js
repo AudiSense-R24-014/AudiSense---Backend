@@ -1,3 +1,11 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Patients
+ *   description: Patients endpoints
+ */
+
+
 import express from 'express';
 import PatientController from '../../controllers/Patient.controller.js';
 import { verifyToken } from '../../middleware/user.middleware.js';
@@ -8,6 +16,7 @@ const router = express.Router();
  * @swagger
  * /api/child:
  *  get:
+ *    tags: [Patients]
  *    summary: Use to request all children
  *    responses:
  *      '200':
@@ -20,6 +29,7 @@ router.get('/', verifyToken, PatientController.getAll);
  * /api/child/{id}:
  *  get:
  *    summary: Get a child by ID
+ *    tags: [Patients]
  *    description: Use to request a child by their ID
  *    parameters:
  *      - in: path
@@ -47,6 +57,7 @@ router.get('/:id', verifyToken, PatientController.getById);
  * /api/child/{id}:
  *  put:
  *    summary: Update a child by ID
+ *    tags: [Patients]
  *    description: Use to update a child by their ID
  *    parameters:
  *      - in: path
@@ -93,6 +104,7 @@ router.put('/:id', verifyToken, PatientController.update);
  * /api/child/{id}:
  *  delete:
  *    summary: Delete a child by ID
+ *    tags: [Patients]
  *    description: Use to delete a child by their ID
  *    parameters:
  *      - in: path
@@ -116,6 +128,7 @@ router.delete('/:id', verifyToken, PatientController.remove);
  * /api/child:
  *  post:
  *    summary: Create a new child
+ *    tags: [Patients]
  *    description: Use to create a new child
  *    requestBody:
  *      required: true
@@ -153,6 +166,7 @@ router.post('/', PatientController.create);
  * /api/child/login:
  *  post:
  *    summary: Login a child
+ *    tags: [Patients]
  *    description: Use to login a child
  *    requestBody:
  *      required: true
