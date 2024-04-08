@@ -1,3 +1,10 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Therapist
+ *   description: Therapist endpoints
+ */
+
 import express from 'express'
 import TherapistController from '../../controllers/Therapist.controller.js'
 import { verifyToken } from '../../middleware/user.middleware.js'
@@ -8,6 +15,7 @@ const router = express.Router()
  * @swagger
  * /api/therapist:
  *   get:
+ *     tags: [Therapist]
  *     description: Use to request all therapists
  *     responses:
  *       '200':
@@ -20,6 +28,7 @@ router.get('/', verifyToken, TherapistController.getAll)
  * /api/therapist/{id}:
  *   get:
  *     summary: Get a therapist by ID
+ *     tags: [Therapist]
  *     description: Use to request a therapist by their ID
  *     parameters:
  *       - in: path
@@ -47,6 +56,7 @@ router.get('/:id', verifyToken, TherapistController.getById)
  * /api/therapist/{id}:
  *   put:
  *     summary: Update a therapist by ID
+ *     tags: [Therapist]
  *     description: Use to update a therapist by their ID
  *     parameters:
  *       - in: path
@@ -85,6 +95,7 @@ router.put('/:id', verifyToken, TherapistController.update)
  * /api/therapist/{id}:
  *   delete:
  *     summary: Delete a therapist by ID
+ *     tags: [Therapist]
  *     description: Use to delete a therapist by their ID
  *     parameters:
  *       - in: path
@@ -101,6 +112,7 @@ router.delete('/:id', verifyToken, TherapistController.remove)
  * /api/therapist:
  *   post:
  *     summary: Add a new therapist
+ *     tags: [Therapist]
  *     description: Use to add a new therapist with their first name, last name, email, contact number, and password
  *     requestBody:
  *       required: true
@@ -132,6 +144,7 @@ router.post('/', TherapistController.create)
  * /api/therapist/login:
  *   post:
  *     summary: Login a therapist
+ *     tags: [Therapist]
  *     description: Use to login a therapist with their email and password
  *     requestBody:
  *       required: true
