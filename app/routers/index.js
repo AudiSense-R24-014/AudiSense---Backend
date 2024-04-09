@@ -3,6 +3,7 @@ import patientRouter from "./routes/Patient.routes.js"
 import therapistPatientRouter from "./routes/TherapistPatient.routes.js"
 import PatientHearingLevelRouter from "./routes/PatientHearingLevel.routes.js"
 import ActivityRouter from "./routes/Activity.routes.js"
+import ActivityPatientRouter from "./routes/ActivityPatient.routes.js"
 
 function router(app) {
     app.use('/api/therapist', therapistRouter)
@@ -10,6 +11,7 @@ function router(app) {
     app.use('/api/therapist-patient', therapistPatientRouter)
     app.use('/api/patient-hearing-level', PatientHearingLevelRouter)
     app.use('/api/activity', ActivityRouter)
+    app.use('/api/activity-patient', ActivityPatientRouter)
 }
 
 export default router
