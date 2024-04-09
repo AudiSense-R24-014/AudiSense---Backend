@@ -7,6 +7,7 @@
 
 import express from 'express';
 import ActivityController from '../../controllers/Activity.controller.js';
+import { verifyToken } from '../../middleware/user.middleware.js';
 
 const router = express.Router();
 
@@ -27,7 +28,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Activity'
  */
-router.get('/', ActivityController.getAll);
+router.get('/', verifyToken, ActivityController.getAll);
 
 /**
  * @swagger
@@ -55,6 +56,7 @@ router.get('/', ActivityController.getAll);
  *       '500':
  *         description: Internal server error
  */
+router.get('/:id', verifyToken, ActivityController.getById);
 
 /**
  * @swagger
@@ -77,7 +79,7 @@ router.get('/', ActivityController.getAll);
  *             schema:
  *               $ref: '#/components/schemas/Activity'
  */
-router.post('/', ActivityController.create);
+router.post('/', verifyToken, ActivityController.create);
 
 /**
  * @swagger
@@ -111,6 +113,7 @@ router.post('/', ActivityController.create);
  *       '500':
  *         description: Internal server error
  */
+router.put('/:id', verifyToken, ActivityController.update);
 
 /**
  * @swagger
@@ -134,5 +137,6 @@ router.post('/', ActivityController.create);
  *       '500':
  *         description: Internal server error
  */
+router.delete('/:id', verifyToken, ActivityController.remove);
 
 export default router;
