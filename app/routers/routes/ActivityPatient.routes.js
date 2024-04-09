@@ -7,6 +7,7 @@
 
 import express from 'express';
 import ActivityPatientController from '../../controllers/ActivityPatient.controller.js';
+import { verifyToken } from '../../middleware/user.middleware.js';
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ const router = express.Router();
  *       '200':
  *         description: A successful response
  */
-router.get('/', ActivityPatientController.getAll);
+router.get('/', verifyToken, ActivityPatientController.getAll);
 
 /**
  * @swagger
@@ -49,7 +50,7 @@ router.get('/', ActivityPatientController.getAll);
  *       '500':
  *         description: Internal server error
  */
-router.get('/:id', ActivityPatientController.getById);
+router.get('/:id', verifyToken, ActivityPatientController.getById);
 
 /**
  * @swagger
@@ -68,7 +69,7 @@ router.get('/:id', ActivityPatientController.getById);
  *       '201':
  *         description: Activity-patient created
  */
-router.post('/', ActivityPatientController.create);
+router.post('/', verifyToken, ActivityPatientController.create);
 
 /**
  * @swagger
@@ -94,7 +95,7 @@ router.post('/', ActivityPatientController.create);
  *       '200':
  *         description: Activity-patient updated
  */
-router.put('/:id', ActivityPatientController.update);
+router.put('/:id', verifyToken, ActivityPatientController.update);
 
 /**
  * @swagger
@@ -114,6 +115,6 @@ router.put('/:id', ActivityPatientController.update);
  *       '200':
  *         description: Activity-patient deleted
  */
-router.delete('/:id', ActivityPatientController.remove);
+router.delete('/:id', verifyToken, ActivityPatientController.remove);
 
 export default router;

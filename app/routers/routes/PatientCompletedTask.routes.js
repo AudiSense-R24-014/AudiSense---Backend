@@ -7,6 +7,7 @@
 
 import express from "express";
 import PatientCompletedTaskController from "../../controllers/PatientCompletedTask.controller.js";
+import { verifyToken } from '../../middleware/user.middleware.js';
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ const router = express.Router();
  *       '200':
  *         description: A successful response
  */
-router.get("/", PatientCompletedTaskController.getAll);
+router.get("/", verifyToken, PatientCompletedTaskController.getAll);
 
 /**
  * @swagger
@@ -49,7 +50,7 @@ router.get("/", PatientCompletedTaskController.getAll);
  *       '500':
  *         description: Internal server error
  */
-router.get("/:id", PatientCompletedTaskController.getById);
+router.get("/:id", verifyToken, PatientCompletedTaskController.getById);
 
 /**
  * @swagger
@@ -76,7 +77,7 @@ router.get("/:id", PatientCompletedTaskController.getById);
  *       '500':
  *         description: Internal server error
  */
-router.post("/", PatientCompletedTaskController.create);
+router.post("/", verifyToken, PatientCompletedTaskController.create);
 
 /**
  * @swagger
@@ -112,7 +113,7 @@ router.post("/", PatientCompletedTaskController.create);
  *       '500':
  *         description: Internal server error
  */
-router.put("/:id", PatientCompletedTaskController.update);
+router.put("/:id", verifyToken, PatientCompletedTaskController.update);
 
 /**
  * @swagger
@@ -136,6 +137,6 @@ router.put("/:id", PatientCompletedTaskController.update);
  *       '500':
  *         description: Internal server error
  */
-router.delete("/:id", PatientCompletedTaskController.remove);
+router.delete("/:id", verifyToken, PatientCompletedTaskController.remove);
 
 export default router;

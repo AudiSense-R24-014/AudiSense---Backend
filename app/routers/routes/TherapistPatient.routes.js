@@ -7,6 +7,7 @@
 
 import express from 'express';
 import TherapistPatientController from '../../controllers/TherapistPatient.controller.js';
+import { verifyToken } from '../../middleware/user.middleware.js';
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ const router = express.Router();
  *      '200':
  *        description: A successful response
  */
-router.get('/', TherapistPatientController.getAll);
+router.get('/', verifyToken, TherapistPatientController.getAll);
 
 /**
  * @swagger
@@ -49,7 +50,7 @@ router.get('/', TherapistPatientController.getAll);
  *      '500':
  *        description: Internal server error
  */
-router.get('/:id', TherapistPatientController.getById);
+router.get('/:id', verifyToken, TherapistPatientController.getById);
 
 /**
  * @swagger
@@ -70,7 +71,7 @@ router.get('/:id', TherapistPatientController.getById);
  *      '500':
  *        description: Internal server error
  */
-router.post('/', TherapistPatientController.create);
+router.post('/', verifyToken, TherapistPatientController.create);
 
 /**
  * @swagger
@@ -98,7 +99,7 @@ router.post('/', TherapistPatientController.create);
  *      '500':
  *        description: Internal server error
  */
-router.put('/:id', TherapistPatientController.update);
+router.put('/:id', verifyToken, TherapistPatientController.update);
 
 /**
  * @swagger
@@ -120,6 +121,6 @@ router.put('/:id', TherapistPatientController.update);
  *      '500':
  *        description: Internal server error
  */
-router.delete('/:id', TherapistPatientController.remove);
+router.delete('/:id', verifyToken, TherapistPatientController.remove);
 
 export default router;

@@ -7,6 +7,7 @@
 
 import express from 'express';
 import PatientHearingLevelController from '../../controllers/PatientHearingLevel.controller.js';
+import { verifyToken } from '../../middleware/user.middleware.js';
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ const router = express.Router();
  *       '200':
  *         description: A successful response
  */
-router.get('/', PatientHearingLevelController.getAll);
+router.get('/', verifyToken, PatientHearingLevelController.getAll);
 
 /**
  * @swagger
@@ -49,7 +50,7 @@ router.get('/', PatientHearingLevelController.getAll);
  *       '500':
  *         description: Internal server error
  */
-router.get('/:id', PatientHearingLevelController.getById);
+router.get('/:id', verifyToken, PatientHearingLevelController.getById);
 
 /**
  * @swagger
@@ -62,7 +63,7 @@ router.get('/:id', PatientHearingLevelController.getById);
  *       '201':
  *         description: Patient hearing level created successfully
  */
-router.post('/', PatientHearingLevelController.create);
+router.post('/', verifyToken, PatientHearingLevelController.create);
 
 /**
  * @swagger
@@ -86,7 +87,7 @@ router.post('/', PatientHearingLevelController.create);
  *       '500':
  *         description: Internal server error
  */
-router.put('/:id', PatientHearingLevelController.update);
+router.put('/:id', verifyToken, PatientHearingLevelController.update);
 
 /**
  * @swagger
@@ -110,6 +111,6 @@ router.put('/:id', PatientHearingLevelController.update);
  *       '500':
  *         description: Internal server error
  */
-router.delete('/:id', PatientHearingLevelController.remove);
+router.delete('/:id', verifyToken, PatientHearingLevelController.remove);
 
 export default router;
