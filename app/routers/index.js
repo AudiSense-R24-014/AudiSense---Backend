@@ -8,6 +8,7 @@ import PatientCompletedTaskRouter from "./routes/PatientCompletedTask.routes.js"
 import PerformanceForTaskRouter from "./routes/PerformanceForTask.routes.js"
 import QuestionRouter from "./routes/Question.routes.js"
 import AnswerRouter from "./routes/Answer.routes.js"
+import ReponseToQnAController from "../controllers/ReponseToQnA.controller.js"
 
 function router(app) {
     app.use('/api/therapist', therapistRouter)
@@ -20,6 +21,7 @@ function router(app) {
     app.use('/api/performance-for-task', PerformanceForTaskRouter)
     app.use('/api/question', QuestionRouter)
     app.use('/api/answer', AnswerRouter)
+    app.get('/api/reponseToQnA', ReponseToQnAController.getAll)
 }
 
 export default router
