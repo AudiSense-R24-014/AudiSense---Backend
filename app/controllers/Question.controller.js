@@ -1,9 +1,9 @@
-import PersonService from "../services/Person.service.js"
+import QuestionService from "../services/Question.service.js";
 
 async function getAll(req, res) {
     try {
-        const persons = await PersonService.getAll();
-        res.status(200).json(persons);
+        const questions = await QuestionService.getAll();
+        res.status(200).json(questions);
     }
     catch (err) {
         res.status(500).send(err.message);
@@ -13,8 +13,8 @@ async function getAll(req, res) {
 async function getById(req, res) {
     try {
         const id = req.params.id;
-        const person = await PersonService.getById(id);
-        res.status(200).json(person);
+        const question = await QuestionService.getById(id);
+        res.status(200).json(question);
     }
     catch (err) {
         res.status(500).send(err.message);
@@ -23,9 +23,9 @@ async function getById(req, res) {
 
 async function create(req, res) {
     try {
-        const person = req.body;
-        await PersonService.create(person);
-        res.status(201).send("Person created");
+        const question = req.body;
+        await QuestionService.create(question);
+        res.status(201).send("Question created");
     }
     catch (err) {
         res.status(500).send(err.message);
@@ -35,9 +35,9 @@ async function create(req, res) {
 async function update(req, res) {
     try {
         const id = req.params.id;
-        const person = req.body;
-        await PersonService.update(id, person);
-        res.status(200).send("Person updated");
+        const question = req.body;
+        await QuestionService.update(id, question);
+        res.status(200).send("Question updated");
     }
     catch (err) {
         res.status(500).send(err.message);
@@ -47,8 +47,8 @@ async function update(req, res) {
 async function remove(req, res) {
     try {
         const id = req.params.id;
-        await PersonService.remove(id);
-        res.status(200).send("Person deleted");
+        await QuestionService.remove(id);
+        res.status(200).send("Question deleted");
     }
     catch (err) {
         res.status(500).send(err.message);

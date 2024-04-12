@@ -14,9 +14,13 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
+const PORT = process.env.BACKEND_PORT
+
 router(app)
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)))
+const swaggerEndpoint = '/api-docs'
+
+app.use(swaggerEndpoint, swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(options)))
 
 poolPromise.then(pool => {
     app.set('pool', pool)
@@ -28,6 +32,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000')
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`)
+    console.log(`Swagger is running on http://localhost:${PORT}${swaggerEndpoint}`)
 })
