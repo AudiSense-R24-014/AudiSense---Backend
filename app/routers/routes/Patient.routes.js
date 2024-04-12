@@ -1,5 +1,13 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Patients
+ *   description: Patients endpoints
+ */
+
+
 import express from 'express';
-import ChildController from '../../controllers/Child.controller.js';
+import PatientController from '../../controllers/Patient.controller.js';
 import { verifyToken } from '../../middleware/user.middleware.js';
 
 const router = express.Router();
@@ -8,18 +16,20 @@ const router = express.Router();
  * @swagger
  * /api/child:
  *  get:
+ *    tags: [Patients]
  *    summary: Use to request all children
  *    responses:
  *      '200':
  *        description: A successful response
  */
-router.get('/', verifyToken, ChildController.getAll);
+router.get('/', verifyToken, PatientController.getAll);
 
 /**
  * @swagger
  * /api/child/{id}:
  *  get:
  *    summary: Get a child by ID
+ *    tags: [Patients]
  *    description: Use to request a child by their ID
  *    parameters:
  *      - in: path
@@ -40,13 +50,14 @@ router.get('/', verifyToken, ChildController.getAll);
  *      '500':
  *        description: Internal server error
  */
-router.get('/:id', verifyToken, ChildController.getById);
+router.get('/:id', verifyToken, PatientController.getById);
 
 /**
  * @swagger
  * /api/child/{id}:
  *  put:
  *    summary: Update a child by ID
+ *    tags: [Patients]
  *    description: Use to update a child by their ID
  *    parameters:
  *      - in: path
@@ -86,13 +97,14 @@ router.get('/:id', verifyToken, ChildController.getById);
  *      '500':
  *        description: Internal server error
  */
-router.put('/:id', verifyToken, ChildController.update);
+router.put('/:id', verifyToken, PatientController.update);
 
 /**
  * @swagger
  * /api/child/{id}:
  *  delete:
  *    summary: Delete a child by ID
+ *    tags: [Patients]
  *    description: Use to delete a child by their ID
  *    parameters:
  *      - in: path
@@ -109,13 +121,14 @@ router.put('/:id', verifyToken, ChildController.update);
  *      '500':
  *        description: Internal server error
  */
-router.delete('/:id', verifyToken, ChildController.remove);
+router.delete('/:id', verifyToken, PatientController.remove);
 
 /**
  * @swagger
  * /api/child:
  *  post:
  *    summary: Create a new child
+ *    tags: [Patients]
  *    description: Use to create a new child
  *    requestBody:
  *      required: true
@@ -146,13 +159,14 @@ router.delete('/:id', verifyToken, ChildController.remove);
  *      '500':
  *        description: Internal server error
  */
-router.post('/', ChildController.create);
+router.post('/', PatientController.create);
 
 /**
  * @swagger
  * /api/child/login:
  *  post:
  *    summary: Login a child
+ *    tags: [Patients]
  *    description: Use to login a child
  *    requestBody:
  *      required: true
@@ -176,6 +190,6 @@ router.post('/', ChildController.create);
  *      '500':
  *        description: Internal server error
  */
-router.post('/login', ChildController.login);
+router.post('/login', PatientController.login);
 
 export default router;

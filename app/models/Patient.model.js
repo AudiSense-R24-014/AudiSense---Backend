@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-class Child {
+class Patient {
     constructor(id, fname, lName, dob, gender, isImplanted, avtLevel, email, contactNo, password) {
         this.id = id
         this.fname = fname
@@ -23,4 +23,4 @@ class Child {
     }
 }
 
-export default Child
+export default Patient
