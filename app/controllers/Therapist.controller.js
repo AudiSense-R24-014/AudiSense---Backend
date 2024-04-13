@@ -66,11 +66,24 @@ async function login(req, res) {
     }
 }
 
+// getPatientsByTherapistId
+async function getPatientsByTherapistId(req, res) {
+    try {
+        const therapistId = req.params.therapistId;
+        const patients = await TherapistService.getPatientsByTherapistId(therapistId);
+        res.status(200).json(patients);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
     remove,
-    login
+    login,
+    getPatientsByTherapistId
 };
