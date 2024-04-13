@@ -55,10 +55,22 @@ async function remove(req, res) {
     }
 }
 
+async function getByActivityId(req, res) {
+    try {
+        const activityId = req.params.activityId;
+        const reponseToQnAs = await ReponseToQnAService.getByActivityId(activityId);
+        res.status(200).json(reponseToQnAs);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
-    remove
+    remove,
+    getByActivityId
 };
