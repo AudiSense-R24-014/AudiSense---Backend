@@ -54,4 +54,24 @@ async function remove(id) {
     return result;
 }
 
-export default { getAll, getById, create, update, remove };
+// get questions by activityId
+async function getByActivityId(activityId) {
+    const pool = await sql.connect();
+    const result = await pool
+        .request()
+        .input("activityId", sql.Int, activityId)
+        .query("SELECT * FROM question WHERE activityId = @activityId");
+    const questions = result.recordset.map((record) => {
+        return new Question(record.id, record.activityId, record.question);
+    });
+    return questions;
+}
+
+export default {
+    getAll,
+    getById,
+    create,
+    update,
+    remove,
+    getByActivityId
+};
