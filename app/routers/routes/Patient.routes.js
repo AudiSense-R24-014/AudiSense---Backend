@@ -22,7 +22,7 @@ const router = express.Router();
  *      '200':
  *        description: A successful response
  */
-router.get('/', verifyToken, PatientController.getAll);
+router.get('/getAll', verifyToken, PatientController.getAll);
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ router.get('/', verifyToken, PatientController.getAll);
  *      '500':
  *        description: Internal server error
  */
-router.get('/:id', verifyToken, PatientController.getById);
+router.get('/getOne/:id', verifyToken, PatientController.getById);
 
 /**
  * @swagger
@@ -191,5 +191,63 @@ router.post('/', PatientController.create);
  *        description: Internal server error
  */
 router.post('/login', PatientController.login);
+
+/**
+ * @swagger
+ * /api/patient/getTherapistByPatientId/{id}:
+ *   get:
+ *     summary: Get therapist by patient ID
+ *     tags: [Patients]
+ *     description: Retrieve the therapist associated with a specific patient ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the patient
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Therapist'
+ *       '401':
+ *         description: Unauthorized
+ *       '500':
+ *         description: Internal server error
+ */
+router.get('/getTherapistByPatientId/:id', verifyToken, PatientController.getTherapistByPatientId);
+
+/**
+ * @swagger
+ * /api/patient/getByTherapistId/{id}:
+ *   get:
+ *     summary: Get patients by therapist ID
+ *     tags: [Patients]
+ *     description: Retrieve patients associated with a specific therapist ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the therapist
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Patient'
+ *       '401':
+ *         description: Unauthorized
+ *       '500':
+ *         description: Internal server error
+ */
+router.get('/getByTherapistId/:id', verifyToken, PatientController.getPatientByTherapistId);
 
 export default router;

@@ -66,12 +66,36 @@ async function login(req, res) {
     }
 }
 
+async function getTherapistByPatientId(req, res) {
+    try {
+        const patientId = req.params.patientId;
+        const therapist = await PatientService.getTherapistByPatientId(patientId);
+        res.status(200).json(therapist);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
+async function getPatientByTherapistId(req, res) {
+    try {
+        const therapistId = req.params.therapistId;
+        const patient = await PatientService.getPatientByTherapistId(therapistId);
+        res.status(200).json(patient);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
     remove,
-    login
+    login,
+    getTherapistByPatientId,
+    getPatientByTherapistId
 };
 
