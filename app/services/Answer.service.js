@@ -20,10 +20,15 @@ async function remove(id) {
     return await AnswerRepository.remove(id);
 }
 
+async function getByQuestionId(questionId) {
+    return await AnswerRepository.getByQuestionId(questionId);
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
-    remove
+    remove,
+    getByQuestionId
 };
