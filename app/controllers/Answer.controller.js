@@ -55,10 +55,22 @@ async function remove(req, res) {
     }
 }
 
+async function getByQuestionId(req, res) {
+    try {
+        const questionId = req.params.questionId;
+        const answers = await AnswerService.getByQuestionId(questionId);
+        res.status(200).json(answers);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
-    remove
+    remove,
+    getByQuestionId
 };

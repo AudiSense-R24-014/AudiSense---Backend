@@ -28,7 +28,7 @@ const router = express.Router();
  *               items:
  *                 $ref: '#/components/schemas/Activity'
  */
-router.get('/', verifyToken, ActivityController.getAll);
+router.get('/getAll', verifyToken, ActivityController.getAll);
 
 /**
  * @swagger
@@ -56,7 +56,7 @@ router.get('/', verifyToken, ActivityController.getAll);
  *       '500':
  *         description: Internal server error
  */
-router.get('/:id', verifyToken, ActivityController.getById);
+router.get('/getOne/:id', verifyToken, ActivityController.getById);
 
 /**
  * @swagger
@@ -138,5 +138,35 @@ router.put('/:id', verifyToken, ActivityController.update);
  *         description: Internal server error
  */
 router.delete('/:id', verifyToken, ActivityController.remove);
+
+/**
+ * @swagger
+ * /api/activity/activityByPatientId/{patientId}:
+ *   patch:
+ *     summary: Get activities by patient ID
+ *     tags: [Activity]
+ *     description: Retrieve activities associated with a specific patient ID
+ *     parameters:
+ *       - in: path
+ *         name: patientId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the patient
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Activity'
+ *       '404':
+ *         description: Patient not found or no activities associated
+ *       '500':
+ *         description: Internal server error
+ */
+router.get('/activityByPatientId/:patientId', verifyToken, ActivityController.getByPatientId);
 
 export default router;

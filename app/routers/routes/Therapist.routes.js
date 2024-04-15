@@ -162,4 +162,34 @@ router.post('/', TherapistController.create)
  */
 router.post('/login', TherapistController.login)
 
+/**
+ * @swagger
+ * /api/therapist/getPatientsByTherapistId/{id}:
+ *   get:
+ *     summary: Get patients by therapist ID
+ *     tags: [Therapists]
+ *     description: Retrieve patients associated with a specific therapist ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the therapist
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Patient'
+ *       '401':
+ *         description: Unauthorized
+ *       '500':
+ *         description: Internal server error
+ */
+router.get('/getPatientsByTherapistId/:id', verifyToken, TherapistController.getPatientsByTherapistId);
+
 export default router

@@ -60,4 +60,50 @@ async function remove(id) {
     return result;
 }
 
-export default { getAll, getById, create, update, remove };
+// get reponseToQnAs by patientId
+async function getByPatientId(patientId) {
+    const pool = await sql.connect();
+    const result = await pool
+        .request()
+        .input("patientId", sql.Int, patientId)
+        .query("SELECT * FROM reponseToQnA WHERE patientId = @patientId");
+    const reponseToQnAs = result.recordset.map((record) => {
+        return new ReponseToQnA(record.id, record.patientId, record.questionId, record.activityId, record.response, record.status);
+    });
+    return reponseToQnAs;
+}
+
+// get reponseToQnAs by questionId
+async function getByQuestionId(questionId) {
+    const pool = await sql.connect();
+    const result = await pool
+        .request()
+        .input("questionId", sql.Int, questionId)
+        .query("SELECT * FROM reponseToQnA WHERE questionId = @questionId");
+    const reponseToQnAs = result.recordset.map((record) => {
+        return new ReponseToQnA(record.id, record.patientId, record.questionId, record.activityId, record.response, record.status);
+    });
+    return reponseToQnAs;
+}
+
+// get reponseToQnAs by activityId
+async function getByActivityId(activityId) {
+    const pool = await sql.connect();
+    const result = await pool
+        .request()
+        .input("activityId", sql.Int, activityId)
+        .query("SELECT * FROM reponseToQnA WHERE activityId = @activityId");
+    const reponseToQnAs = result.recordset.map((record) => {
+        return new ReponseToQnA(record.id, record.patientId, record.questionId, record.activityId, record.response, record.status);
+    });
+    return reponseToQnAs;
+}
+
+export default {
+    getAll,
+    getById,
+    create,
+    update,
+    remove,
+    getByActivityId
+};

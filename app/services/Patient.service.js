@@ -24,11 +24,21 @@ async function login(email, password) {
     return await PatientRepository.login(email, password);
 }
 
+async function getTherapistByPatientId(patientId) {
+    return await PatientRepository.getTherapistByPatientId(patientId);
+}
+
+async function getPatientByTherapistId(therapistId) {
+    return await PatientRepository.getPatientByTherapistId(therapistId);
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
     remove,
-    login
+    login,
+    getTherapistByPatientId,
+    getPatientByTherapistId
 };
