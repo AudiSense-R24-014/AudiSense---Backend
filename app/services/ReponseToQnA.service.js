@@ -20,10 +20,15 @@ async function remove(id) {
     return await ReponseToQnARepository.remove(id);
 }
 
+async function getByActivityId(activityId) {
+    return await ReponseToQnARepository.getByActivityId(activityId);
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
-    remove
+    remove,
+    getByActivityId
 };

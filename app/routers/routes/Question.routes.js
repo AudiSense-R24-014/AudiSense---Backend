@@ -24,7 +24,7 @@ const router = express.Router();
  *       '500':
  *         description: Internal server error
  */
-router.get('/', verifyToken, QuestionController.getAll);
+router.get('/getAll', verifyToken, QuestionController.getAll);
 
 /**
  * @swagger
@@ -52,7 +52,7 @@ router.get('/', verifyToken, QuestionController.getAll);
  *       '500':
  *         description: Internal server error
  */
-router.get('/:id', verifyToken, QuestionController.getById);
+router.get('/getOne/:id', verifyToken, QuestionController.getById);
 
 /**
  * @swagger
@@ -122,5 +122,37 @@ router.put('/:id', verifyToken, QuestionController.update);
  *         description: Internal server error
  */
 router.delete('/:id', verifyToken, QuestionController.remove);
+
+/**
+ * @swagger
+ * /api/question/activity/{activityId}:
+ *   get:
+ *     summary: Get questions by activity ID
+ *     tags: [Questions]
+ *     description: Retrieve questions associated with a specific activity ID
+ *     parameters:
+ *       - in: path
+ *         name: activityId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the activity
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Question'
+ *       '401':
+ *         description: Unauthorized
+ *       '404':
+ *         description: Activity not found
+ *       '500':
+ *         description: Internal server error
+ */
+router.get('/activity/:activityId', verifyToken, QuestionController.getByActivityId);
 
 export default router;

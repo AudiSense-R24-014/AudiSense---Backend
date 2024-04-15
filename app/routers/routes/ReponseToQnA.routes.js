@@ -22,7 +22,7 @@ const router = express.Router();
  *       '200':
  *         description: A successful response
  */
-router.get('/', verifyToken, ReponseToQnAController.getAll);
+router.get('/getAll', verifyToken, ReponseToQnAController.getAll);
 
 /**
  * @swagger
@@ -50,7 +50,7 @@ router.get('/', verifyToken, ReponseToQnAController.getAll);
  *       '500':
  *         description: Internal server error
  */
-router.get('/:id', verifyToken, ReponseToQnAController.getById);
+router.get('/getOne/:id', verifyToken, ReponseToQnAController.getById);
 
 /**
  * @swagger
@@ -96,6 +96,30 @@ router.put('/:id', verifyToken, ReponseToQnAController.update);
  *         description: Internal server error
  */
 router.delete('/:id', verifyToken, ReponseToQnAController.remove);
+
+/**
+ * @swagger
+ * /api/reponseToQnA/activity/{activityId}:
+ *  get:
+ *   summary: Get all reponseToQnAs by activity ID
+ *  tags: [ReponseToQnA]
+ * description: Use to request all reponseToQnAs by activity ID
+ * parameters:
+ *  - in: path
+ *   name: activityId
+ *  required: true
+ * schema:
+ * type: integer
+ * description: The ID of the activity to retrieve reponseToQnAs from
+ * responses:
+ * '200':
+ * description: Successful response
+ * '404':
+ * description: ReponseToQnAs not found
+ * '500':
+ * description: Internal server error
+ */
+router.get('/getByActivityId/:activityId', verifyToken, ReponseToQnAController.getByActivityId);
 
 // Define components schema
 /**

@@ -1,5 +1,9 @@
 import { sql } from "../../config/db.js";
+import Therapist from "../models/Therapist.model.js";
 import Patient from "../models/Patient.model.js";
+import TherapistPatient from "../models/TherapistPatient.model.js";
+import Activity from "../models/Activity.model.js";
+import ActivityPatient from "../models/ActivityPatient.model.js";
 import { createTokan } from "../middleware/user.middleware.js";
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv'
@@ -86,11 +90,60 @@ async function login(email, password) {
     return null;
 }
 
+// get therapists by patient id from therapistPatient
+async function getTherapistByPatientId(patientId) {
+    const pool = await sql.connect();
+    const result = await pool
+        .request()
+        .input("patientId", sql.Int, patientId)
+        .query("SELECT * FROM therapistPatient WHERE patientId = @patientId");
+    const therapistsList = result.recordset.map((record) => {
+        return new TherapistPatient(record.id, record.therapistId, record.patientId);
+    });
+    // get therapists by therapistId from therapist
+    const therapists = [];
+    for (let i = 0; i < therapistsList.length; i++) {
+        const result = await pool
+            .request()
+            .input("id", sql.Int, therapistsList[i].therapistId)
+            .query("SELECT * FROM therapist WHERE id = @id");
+        const record = result.recordset[0];
+        therapists.push(new Therapist(record.id, record.fName, record.lName, record.email, record.contactNo, record.password));
+    }
+    return therapists;
+}
+
+// get activities by patient id from activityPatient and activity
+async function getActivitiesByPatientId(patientId) {
+    const pool = await sql.connect();
+    const result = await pool
+        .request()
+        .input("patientId", sql.Int, patientId)
+        .query("SELECT * FROM activityPatient WHERE patientId = @patientId");
+    const activitiesList = result.recordset.map((record) => {
+        return new ActivityPatient(record.id, record.activityId, record.patientId);
+    });
+    // get activities by activityId from activity
+    const activities = [];
+    for (let i = 0; i < activitiesList.length; i++) {
+        const result = await pool
+            .request()
+            .input("id", sql.Int, activitiesList[i].activityId)
+            .query("SELECT * FROM activity WHERE id = @id");
+        const record = result.recordset[0];
+        activities.push(new Activity(record.id, record.name, record.description, record.url, record.type));
+    }
+    return activities;
+}
+
+
 export default {
     getAll,
     getById,
     create,
     update,
     remove,
-    login
+    login,
+    getTherapistByPatientId,
+    getActivitiesByPatientId
 };
