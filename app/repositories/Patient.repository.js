@@ -11,10 +11,10 @@ import dotenv from 'dotenv'
 async function getAll() {
     const pool = await sql.connect();
     const result = await pool.request().query("SELECT * FROM patient");
-    const children = result.recordset.map((record) => {
+    const patients = result.recordset.map((record) => {
         return new Patient(record.id, record.fName, record.lName, record.dob, record.gender, record.isImplanted, record.avtLevel, record.email, record.contactNo, record.password)
     });
-    return children;
+    return patients;
 }
 
 async function getById(id) {
