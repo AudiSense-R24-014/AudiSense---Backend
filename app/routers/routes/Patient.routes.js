@@ -14,7 +14,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/patient:
+ * /api/patient/getAll:
  *  get:
  *    tags: [Patients]
  *    summary: Use to request all patientren
@@ -26,7 +26,7 @@ router.get('/getAll', verifyToken, PatientController.getAll);
 
 /**
  * @swagger
- * /api/patient/{id}:
+ * /api/patient/getOne/{id}:
  *  get:
  *    summary: Get a patient by ID
  *    tags: [Patients]
