@@ -167,6 +167,6 @@ router.delete('/:id', verifyToken, ActivityController.remove);
  *       '500':
  *         description: Internal server error
  */
-router.get('/activityByPatientId/:patientId', verifyToken, ActivityController.getByPatientId);
+//
 
 export default router;
