@@ -1,5 +1,6 @@
 import { sql } from "../../config/db.js";
 import Therapist from "../models/Therapist.model.js";
+import Patient from "../models/Patient.model.js";
 import { createTokan } from "../middleware/user.middleware.js";
 import bcrypt from "bcrypt";
 import dotenv from 'dotenv'
@@ -79,13 +80,35 @@ async function login(email, password) {
     }
 }
 
+//get patients by therapistid from therapistPatient
+async function getPatientsByTherapistId(therapistId) {
+    const pool = await sql.connect();
+    const result = await pool
+        .request()
+        .input("therapistId", sql.Int, therapistId)
+        .query("SELECT * FROM therapistPatient WHERE therapistId = @therapistId");
+    const patientsList = result.recordset.map((record) => {
+        return new TherapistPatient(record.id, record.therapistId, record.patientId);
+    });
+    //get patients by patientId from patient
+    const patients = [];
+    for (let i = 0; i < patientsList.length; i++) {
+        const result = await pool
+            .request()
+            .input("id", sql.Int, patientsList[i].patientId)
+            .query("SELECT * FROM patient WHERE id = @id");
+        const record = result.recordset[0];
+        patients.push(new Patient(record.id, record.fName, record.lName, record.email, record.contactNo, record.password));
+    }
+    return patients;
+}
+
 export default {
     getAll,
     getById,
     create,
     update,
     remove,
-    login
+    login,
+    getPatientsByTherapistId
 };
-
-
