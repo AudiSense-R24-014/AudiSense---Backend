@@ -40,7 +40,7 @@ async function update(id, answer) {
         .input("id", sql.Int, id)
         .input("questionId", sql.Int, answer.questionId)
         .input("text", sql.NVarChar, answer.text)
-        .input("isCorrect", sql.Bit, answer.isCorrect)
+        .input("isCorrect", sql.Int, answer.isCorrect)
         .query(
             "UPDATE answer SET questionId = @questionId, text = @text, isCorrect = @isCorrect WHERE id = @id"
         );

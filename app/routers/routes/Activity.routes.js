@@ -3,6 +3,22 @@
  * tags:
  *   name: Activity
  *   description: The Activity managing API
+ *
+ * components:
+ *   schemas:
+ *     Activity:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         name:
+ *           type: string
+ *         description:
+ *           type: string
+ *         AVTLevel:
+ *           type: string
+ *         difficulty:
+ *           type: string
  */
 
 import express from 'express';
@@ -138,35 +154,5 @@ router.put('/:id', verifyToken, ActivityController.update);
  *         description: Internal server error
  */
 router.delete('/:id', verifyToken, ActivityController.remove);
-
-/**
- * @swagger
- * /api/activity/activityByPatientId/{patientId}:
- *   patch:
- *     summary: Get activities by patient ID
- *     tags: [Activity]
- *     description: Retrieve activities associated with a specific patient ID
- *     parameters:
- *       - in: path
- *         name: patientId
- *         required: true
- *         schema:
- *           type: integer
- *         description: The ID of the patient
- *     responses:
- *       '200':
- *         description: Successful response
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Activity'
- *       '404':
- *         description: Patient not found or no activities associated
- *       '500':
- *         description: Internal server error
- */
-//
 
 export default router;

@@ -21,6 +21,7 @@ const router = express.Router();
  *     responses:
  *       '200':
  *         description: A successful response
+ * 
  */
 router.get('/', verifyToken, ActivityPatientController.getAll);
 
