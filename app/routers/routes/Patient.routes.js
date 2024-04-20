@@ -14,10 +14,10 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/child:
+ * /api/patient/getAll:
  *  get:
  *    tags: [Patients]
- *    summary: Use to request all children
+ *    summary: Use to request all patientren
  *    responses:
  *      '200':
  *        description: A successful response
@@ -26,27 +26,27 @@ router.get('/getAll', verifyToken, PatientController.getAll);
 
 /**
  * @swagger
- * /api/child/{id}:
+ * /api/patient/getOne/{id}:
  *  get:
- *    summary: Get a child by ID
+ *    summary: Get a patient by ID
  *    tags: [Patients]
- *    description: Use to request a child by their ID
+ *    description: Use to request a patient by their ID
  *    parameters:
  *      - in: path
  *        name: id
  *        required: true
  *        schema:
  *          type: integer
- *        description: The ID of the child to retrieve
+ *        description: The ID of the patient to retrieve
  *    responses:
  *      '200':
  *        description: Successful response
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Child'
+ *              $ref: '#/components/schemas/patient'
  *      '404':
- *        description: Child not found
+ *        description: patient not found
  *      '500':
  *        description: Internal server error
  */
@@ -54,18 +54,18 @@ router.get('/getOne/:id', verifyToken, PatientController.getById);
 
 /**
  * @swagger
- * /api/child/{id}:
+ * /api/patient/{id}:
  *  put:
- *    summary: Update a child by ID
+ *    summary: Update a patient by ID
  *    tags: [Patients]
- *    description: Use to update a child by their ID
+ *    description: Use to update a patient by their ID
  *    parameters:
  *      - in: path
  *        name: id
  *        required: true
  *        schema:
  *          type: integer
- *        description: The ID of the child to update
+ *        description: The ID of the patient to update
  *    requestBody:
  *      required: true
  *      content:
@@ -93,7 +93,7 @@ router.get('/getOne/:id', verifyToken, PatientController.getById);
  *      '200':
  *        description: Successful response
  *      '404':
- *        description: Child not found
+ *        description: patient not found
  *      '500':
  *        description: Internal server error
  */
@@ -101,23 +101,23 @@ router.put('/:id', verifyToken, PatientController.update);
 
 /**
  * @swagger
- * /api/child/{id}:
+ * /api/patient/{id}:
  *  delete:
- *    summary: Delete a child by ID
+ *    summary: Delete a patient by ID
  *    tags: [Patients]
- *    description: Use to delete a child by their ID
+ *    description: Use to delete a patient by their ID
  *    parameters:
  *      - in: path
  *        name: id
  *        required: true
  *        schema:
  *          type: integer
- *        description: The ID of the child to delete
+ *        description: The ID of the patient to delete
  *    responses:
  *      '200':
  *        description: Successful response
  *      '404':
- *        description: Child not found
+ *        description: patient not found
  *      '500':
  *        description: Internal server error
  */
@@ -125,11 +125,11 @@ router.delete('/:id', verifyToken, PatientController.remove);
 
 /**
  * @swagger
- * /api/child:
+ * /api/patient:
  *  post:
- *    summary: Create a new child
+ *    summary: Create a new patient
  *    tags: [Patients]
- *    description: Use to create a new child
+ *    description: Use to create a new patient
  *    requestBody:
  *      required: true
  *      content:
@@ -155,7 +155,7 @@ router.delete('/:id', verifyToken, PatientController.remove);
  *              password:
  *    responses:
  *      '201':
- *        description: Child created
+ *        description: patient created
  *      '500':
  *        description: Internal server error
  */
@@ -163,11 +163,11 @@ router.post('/', PatientController.create);
 
 /**
  * @swagger
- * /api/child/login:
+ * /api/patient/login:
  *  post:
- *    summary: Login a child
+ *    summary: Login a patient
  *    tags: [Patients]
- *    description: Use to login a child
+ *    description: Use to login a patient
  *    requestBody:
  *      required: true
  *      content:
